@@ -1,11 +1,7 @@
 from tkinter import *
-from tkinter import ttk
 from tkinter import filedialog
-from tkinter import messagebox
 import pygame
 from PIL import Image, ImageTk
-import PIL
-
 
 pygame.mixer.init()
 
@@ -16,30 +12,39 @@ root.config(bg="#116562")
 
 path_file = None
 
+
 def sound1():
     pygame.mixer.music.load("sfx/sound1.mp3")
     pygame.mixer.music.play()
+
 
 def sound2():
     pygame.mixer.music.load("sfx/sound2.mp3")
     pygame.mixer.music.play()
 
+
 def sound3():
     pygame.mixer.music.load("sfx/sound3.mp3")
     pygame.mixer.music.play()
+
 
 def sound4():
     pygame.mixer.music.load("sfx/sound4.mp3")
     pygame.mixer.music.play()
 
+
 def sound5():
     pygame.mixer.music.load("sfx/sound5.mp3")
     pygame.mixer.music.play()
 
+
 def file_browser():
     global path_file
     sound2()
-    rep = filedialog.askopenfilenames(parent=root, filetypes=[("PNG", "*.png"), ("JPEG", "*.jpg"), ("All files", "*")])
+    rep = filedialog.askopenfilenames(parent=root,
+                                      filetypes=[("PNG", "*.png"),
+                                                 ("JPEG", "*.jpg"),
+                                                 ("All files", "*")])
     if rep:
         path_file = rep[0]
         label2.configure(text=path_file.split("/")[-1])
@@ -50,7 +55,8 @@ def file_browser():
         canvas.create_image(72, 72, image=pic)
         canvas.image = pic
         sound5()
-       
+
+
 def file_converter():
     global path_file
     if path_file is not None:
@@ -59,11 +65,15 @@ def file_converter():
             proper_name = name.split(".")[-2]
             image = image.convert('RGB')
             image.save("converted/" + proper_name + "_converted.jpg")
-        label3.configure(text="Image successfully converted!", fg="orange", font=(None, 19))
+        label3.configure(text="Image successfully converted!",
+                         fg="orange",
+                         font=(None, 19))
         sound3()
     else:
-        label3.configure(text="Please, select file!", fg="red", font=(None, 19))
+        label3.configure(text="Please, select file!",
+                         fg="red", font=(None, 19))
         sound4()
+
 
 def toggle():
     if toggle_button.config('text')[-1] == 'Dark Theme is On':
@@ -99,13 +109,15 @@ label = Label(text="Select Image", bg="#116562", fg="orange", font="bold")
 label.pack(in_=container1, side=LEFT, padx=7)
 container1.pack(side=TOP, fill=X)
 
-btn1 = Button(text="Open files", command=file_browser, bg="orange", bd=5, borderwidth=5, width=8, height=1, font="bold")
+btn1 = Button(text="Open files", command=file_browser, bg="orange", bd=5,
+              borderwidth=5, width=8, height=1, font="bold")
 btn1.pack(anchor=NW, padx=10, pady=10)
 canvas = Canvas(width=140, height=140)
 canvas.pack(pady=10)
 label2 = Label(bg="#116562", fg="orange", width=15, height=2, font="bold")
 label2.pack()
-btn2 = Button(text="Convert", command=file_converter, bg="orange", bd=5, borderwidth=5, width=8, height=1, font="bold")
+btn2 = Button(text="Convert", command=file_converter, bg="orange", bd=5,
+              borderwidth=5, width=8, height=1, font="bold")
 btn2.pack(anchor=NW, padx=10, pady=20)
 label3 = Label(bg="#116562", fg="orange", width=25, height=2, font="bold")
 label3.pack(pady=5)
